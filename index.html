@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Payment Portal</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Segoe UI,Arial,sans-serif;
+}
+
+body{
+
+    background:#f3f6fb;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+
+}
+
+.card{
+
+    width:450px;
+    background:white;
+    border-radius:12px;
+    box-shadow:0 15px 40px rgba(0,0,0,.15);
+    overflow:hidden;
+
+}
+
+.header{
+
+    background:#0066cc;
+    color:white;
+    padding:25px;
+    text-align:center;
+
+}
+
+.header h1{
+
+    font-size:24px;
+    margin-bottom:5px;
+
+}
+
+.header p{
+
+    opacity:.9;
+
+}
+
+.content{
+
+    padding:30px;
+
+}
+
+.row{
+
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:18px;
+    border-bottom:1px solid #eee;
+    padding-bottom:10px;
+
+}
+
+.label{
+
+    color:#666;
+    font-weight:bold;
+
+}
+
+.value{
+
+    color:#222;
+
+}
+
+.amount{
+
+    text-align:center;
+    margin:35px 0;
+
+}
+
+.amount h2{
+
+    color:#777;
+    margin-bottom:10px;
+
+}
+
+.amount h1{
+
+    font-size:42px;
+    color:#28a745;
+
+}
+
+button{
+
+    width:100%;
+    padding:18px;
+    border:none;
+    border-radius:8px;
+    background:#635BFF;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+    transition:.3s;
+
+}
+
+button:hover{
+
+    background:#5249ff;
+
+}
+
+.footer{
+
+    text-align:center;
+    margin-top:20px;
+    color:#888;
+    font-size:13px;
+
+}
+
+.status{
+
+    display:inline-block;
+    background:#fff3cd;
+    color:#856404;
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:13px;
+
+}
+
+.success{
+
+    background:#d4edda;
+    color:#155724;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<div class="header">
+
+<h1>Reliance Payment Portal</h1>
+
+<p>Secure Online Payment</p>
+
+</div>
+
+<div class="content">
+
+<div class="row">
+
+<div class="label">Invoice</div>
+
+<div class="value" id="invoiceNumber"></div>
+
+</div>
+
+<div class="row">
+
+<div class="label">Customer</div>
+
+<div class="value" id="customerName"></div>
+
+</div>
+
+<div class="row">
+
+<div class="label">Currency</div>
+
+<div class="value" id="currency"></div>
+
+</div>
+
+<div class="row">
+
+<div class="label">Status</div>
+
+<div class="value">
+
+<span class="status" id="paymentStatus"></span>
+
+</div>
+
+</div>
+
+<div class="amount">
+
+<h2>Total Amount</h2>
+
+<h1 id="amount"></h1>
+
+</div>
+
+<button onclick="payNow()">
+
+Pay Securely with Stripe
+
+</button>
+
+<div class="footer">
+
+Powered by Stripe • Protected by Azure
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+/*
+Pretend this came from Azure Function
+
+GET /api/paymentRequest/{token}
+
+*/
+
+const paymentRequest={
+
+invoiceNumber:"INV-100045",
+
+customerName:"EverBrook Food Industries",
+
+currency:"USD",
+
+amount:"5,250.00",
+
+status:"Pending",
+
+paymentToken:"b52fd746d99044389ac11"
+
+};
+
+document.getElementById("invoiceNumber").innerHTML=paymentRequest.invoiceNumber;
+
+document.getElementById("customerName").innerHTML=paymentRequest.customerName;
+
+document.getElementById("currency").innerHTML=paymentRequest.currency;
+
+document.getElementById("amount").innerHTML="$"+paymentRequest.amount;
+
+document.getElementById("paymentStatus").innerHTML=paymentRequest.status;
+
+function payNow(){
+
+    /*
+    Future Flow
+
+    Browser
+
+       ↓
+
+    POST /api/createCheckout
+
+       ↓
+
+    Azure Function
+
+       ↓
+
+    Stripe Checkout Session
+
+       ↓
+
+    redirect(session.url)
+
+    */
+
+    alert(
+
+`Demo
+
+The browser will call your Azure Function.
+
+Azure Function will:
+
+✔ Read Dataverse
+
+✔ Create Stripe Checkout Session
+
+✔ Redirect to Stripe Checkout`
+
+);
+
+}
+
+</script>
+
+</body>
+
+</html>
